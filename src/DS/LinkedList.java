@@ -66,6 +66,23 @@ public class LinkedList {
         return prev_tail;
     }
 
+    public Node popFirst() {
+        if (this.length == 0) {
+            this.length--;
+            return null;
+        }
+
+        Node prev_head = this.head;
+        if (this.length == 1) {
+            this.head = this.tail = null;
+        } else {
+            this.head = prev_head.next;
+        }
+
+        this.length--;
+        return prev_head;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -83,7 +100,7 @@ public class LinkedList {
         System.out.println(this);
     }
 
-    class Node {
+    public class Node {
         protected int value;
         protected Node next;
 

@@ -6,7 +6,7 @@ public class Main {
         ll.append(1);
         ll.append(2);
         ll.prepend(0);
-        ll.pop();
+        ll.popFirst();
 
         ll.display();
     }
