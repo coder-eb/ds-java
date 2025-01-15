@@ -7,6 +7,7 @@ public class Main {
         ll.append(2);
         ll.prepend(0);
         ll.popFirst();
+        ll.set(1,0);
 
         ll.display();
     }

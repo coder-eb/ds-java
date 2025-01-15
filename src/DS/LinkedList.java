@@ -48,6 +48,16 @@ public class LinkedList {
         return pointer;
     }
 
+    public boolean set(int index, int value) {
+        Node target_node = this.get(index);
+        if (target_node == null) {
+            return false;
+        }
+
+        target_node.value = value;
+        return true;
+    }
+
     public Node pop() {
         if (this.length == 0) {
             return null;
