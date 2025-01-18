@@ -1,7 +1,5 @@
 package DS;
 
-import org.w3c.dom.Node;
-
 public class LinkedList {
     private Node head;
     private Node tail;
@@ -11,7 +9,7 @@ public class LinkedList {
         this.length = 0;
     }
 
-    public void append(int value) {
+    public boolean append(int value) {
         Node new_tail = new Node(value);
         if (this.length == 0) {
             this.head = this.tail = new_tail;
@@ -22,9 +20,10 @@ public class LinkedList {
         }
 
         this.length++;
+        return false;
     }
 
-    public void prepend(int value) {
+    public boolean prepend(int value) {
         Node new_head = new Node(value);
         if (this.length == 0) {
             this.head = this.tail = new_head;
@@ -34,6 +33,7 @@ public class LinkedList {
         }
 
         this.length++;
+        return true;
     }
 
     public Node get(int index) {
@@ -56,6 +56,50 @@ public class LinkedList {
 
         target_node.value = value;
         return true;
+    }
+
+    public boolean insert(int index, int value) {
+        if(index < 0 || index > this.length) {
+            return false;
+        }
+
+        if(index == this.length) {
+            return this.append(value);
+        }
+        if(index == 0) {
+            return this.prepend(value);
+        }
+
+        Node prev_node = this.get(index-1);
+        Node next_node = prev_node.next;
+
+        Node target_node = new Node(value);
+        prev_node.next = target_node;
+        target_node.next = next_node;
+
+        this.length++;
+        return true;
+    }
+
+    public Node remove(int index) {
+        if(index < 0 || index >= this.length) {
+            return null;
+        }
+
+        if(index == 0) {
+            return this.popFirst();
+        }
+        if(index == this.length-1) {
+            return this.pop();
+        }
+
+        Node prev_node = this.get(index-1);
+        Node target_node = prev_node.next;
+        prev_node.next = target_node.next;
+        target_node.next = null;
+
+        this.length--;
+        return target_node;
     }
 
     public Node pop() {
@@ -92,6 +136,7 @@ public class LinkedList {
         this.length--;
         return prev_head;
     }
+
 
     @Override
     public String toString() {
